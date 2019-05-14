@@ -1,5 +1,7 @@
 package com.qiuxk.learn_lamada.service;
 
+import com.qiuxk.learn_lamada.exception.BaseException;
+
 import java.util.List;
 
 /**
@@ -43,6 +45,16 @@ public interface ListOperation {
      * @return
      */
     List<String> unionListWithoutSame(List<String> list1,List<String> list2);
+
+    /**
+     * 求和
+     * @param list1
+     * @return
+     */
+    Integer sumAll(List<String> list1) throws BaseException;
+
+
+
 
 
 

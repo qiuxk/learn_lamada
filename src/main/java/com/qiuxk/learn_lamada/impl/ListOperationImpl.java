@@ -1,9 +1,13 @@
 package com.qiuxk.learn_lamada.impl;
 
+import com.qiuxk.learn_lamada.exception.BaseException;
 import com.qiuxk.learn_lamada.service.ListOperation;
 
+import java.util.IntSummaryStatistics;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ListOperationImpl implements ListOperation {
 
@@ -63,6 +67,26 @@ public class ListOperationImpl implements ListOperation {
         collect1.addAll(collect2);
         List<String> resList = collect1.parallelStream().distinct().collect(Collectors.toList());
         return resList;
+    }
+
+    @Override
+    public Integer sumAll(List<String> list1) throws BaseException {
+
+       /* IntStream intStream = list1.stream().mapToInt((i) -> new Integer(i));
+        IntSummaryStatistics summaryStatistics = intStream.summaryStatistics();
+
+
+        summaryStatistics.getSum();//求和
+        summaryStatistics.getAverage()//平均值
+        summaryStatistics.getMax();//最大值
+        summaryStatistics.getMin();//最小值*/
+
+    /*    Optional<List<String>> opsList = Optional.ofNullable(list1);
+         opsList.ifPresent(i ->i.stream().map( j -> Integer.valueOf(j)).collect(Collectors.toList()).
+                stream().reduce((a,b)->a+b).orElse(new Integer("0")));*/
+        Optional.ofNullable(list1).orElseThrow(BaseException::new);
+        Optional<Integer> reduce = list1.stream().map(i -> Integer.valueOf(i)).collect(Collectors.toList()).stream().reduce((a, b) -> a + b);
+        return  reduce.orElse(null);
     }
 
 }
